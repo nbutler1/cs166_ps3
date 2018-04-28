@@ -43,7 +43,27 @@ bool is_red_black_tree(const struct Node* root) {
     return bh != -2;
 }
 
+void color_rb_tree(struct Node* root, bool is_root, bool next_black){
+    if(root == NULL)
+        return;
+    if(is_root){
+        root->color = BLACK;
+        color_rb_tree(root->left, false, next_black);
+        color_rb_tree(root->right, false, next_black);
+    }else{
+        if(next_black == true){
+            root->color = BLACK;
+        }else {
+            root->color = RED;
+        }
+        color_rb_tree(root->left, false, !next_black);
+        color_rb_tree(root->right, false, !next_black);
+    }
+}
+
 void color_avl_tree(struct Node* root) {
-  /* TODO: Implement this! */
-  (void) root;
+    int height = tree_walker(root); // I one indexed sorry
+    color_rb_tree(root, true, !((height % 2) == 0));
+
+
 }
