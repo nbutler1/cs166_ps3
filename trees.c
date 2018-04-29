@@ -66,10 +66,11 @@ void color_rb_tree(struct Node* root, bool is_root, bool next_black, int num_bla
         int hr = min_tree_walker(root->right);
         
         //If no more black, color red.
-        if(num_black == 0){
-            root->color = RED;
-            next_black = true;
-        }else if(next_black == true || (hl < num_black) || (hr < num_black)){
+    //    if(num_black == 0){
+    //        root->color = RED;
+    //        next_black = true;
+        //}else 
+        if(next_black == true || (hl < num_black) || (hr < num_black)){
             root->color = BLACK;
             num_black -= 1;
             next_black = true;
@@ -103,6 +104,7 @@ void color_avl_tree(struct Node* root) {
     fprintf(stderr, "height: %d\n", height);
     fprintf(stderr, "num_black: %d\n", num_black);
     color_rb_tree(root, true, next_black, num_black);
+    /**
     int counter = 1;
     struct Node* root2 = root;
     while(root2 != NULL){
@@ -139,5 +141,5 @@ void color_avl_tree(struct Node* root) {
         }
         counter += 1;
 
-    }
+    }**/
 }
